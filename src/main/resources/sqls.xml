@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE queries [
+<!ELEMENT queries (query+)>
+<!ELEMENT query (#PCDATA)>
+<!ATTLIST query id ID #IMPLIED>
+]>
+
+<queries>
+	<query id="selectTotalCount">
+	SELECT count(*) FROM repo
+	</query>
+
+	<query id="selectRepos">
+	SELECT * FROM repo
+	ORDER BY id
+	LIMIT ? OFFSET ?
+	</query>
+	
+	<query id="selectLangsById">
+	SELECT name FROM lang
+	WHERE id = ?
+	</query>
+
+	<query id="selectTagsById">
+	SELECT name FROM tag
+	WHERE id = ?
+	</query>
+	
+</queries>
