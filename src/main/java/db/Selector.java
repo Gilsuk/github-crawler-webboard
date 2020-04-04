@@ -62,18 +62,25 @@ public class Selector implements AutoCloseable {
 	}
 
 	public List<Repo> getRepos(String category, String keyword, int limit, int offset) {
+		List<Repo> list;
 		switch (Category.valueOf(category)) {
 		case desc:
-			return getPartialRepos("selectReposByDesc", "%" + keyword + "%", limit, offset);
+			list = getPartialRepos("selectReposByDesc", "%" + keyword + "%", limit, offset);
+			break;
 		case lang:
-			return getPartialRepos("selectReposByLang", keyword, limit, offset);
+			list = getPartialRepos("selectReposByLang", keyword, limit, offset);
+			break;
 		case tag:
-			return getPartialRepos("selectReposByTag", keyword, limit, offset);
+			list = getPartialRepos("selectReposByTag", keyword, limit, offset);
+			break;
 		case title:
-			return getPartialRepos("selectReposByTitle", "%" + keyword + "%", limit, offset);
+			list = getPartialRepos("selectReposByTitle", "%" + keyword + "%", limit, offset);
+			break;
 		default:
-			return new ArrayList<Repo>();
+			list = new ArrayList<Repo>();
 		}
+		completeRepos(list);
+		return list;
 	}
 
 	private List<Repo> getPartialRepos(String statementId, String keyword, int limit, int offset) {
