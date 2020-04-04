@@ -61,7 +61,7 @@ public class Paging {
 		if (pageCount == 0)
 			setPageCount(10);// 화면에 보여질 페이지수 기본값 세팅
 		if (listCount == 0)
-			setListCount(10);// 화면에 보여질 게시글수 기본값 세팅
+			setListCount(20);// 화면에 보여질 게시글수 기본값 세팅
 
 		// 총 페이지수 계산
 		totalPage = totalCount / listCount;

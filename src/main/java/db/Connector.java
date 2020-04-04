@@ -17,6 +17,10 @@ public class Connector {
 		
 		return null;
 	}
+	
+	public Connection connect() {
+		return connect(":resource:db/github.db");
+	}
 
 	private SQLiteConfig getConfig() {
 		SQLiteConfig config = new SQLiteConfig();

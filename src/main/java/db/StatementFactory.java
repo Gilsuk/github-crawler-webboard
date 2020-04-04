@@ -1,10 +1,7 @@
 package db;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,7 +14,9 @@ import org.jsoup.nodes.Element;
 
 public class StatementFactory implements AutoCloseable {
 	
-	private static final String sqlPath = "src/main/resources/sqls.xml";
+	private static final String sqlPath =
+				System.getProperty("catalina.base")
+				+ "/wtpwebapps/webboard/WEB-INF/classes/sqls.xml";
 	private final Connection connection;
 	private final Map<String, PreparedStatement> statements;
 
@@ -41,9 +40,9 @@ public class StatementFactory implements AutoCloseable {
 
 	private String readSqlfromXML(String statementId) {
 		Document document = null;
-		
-		try (InputStream stream = new BufferedInputStream(new FileInputStream(new File(sqlPath)))){
-			document = Jsoup.parse(stream, "UTF-8", sqlPath);
+		try {
+			File file = new File(StatementFactory.sqlPath);
+			document = Jsoup.parse(file, "UTF-8");
 		} catch (IOException e) { e.printStackTrace(); }
 
 		Element elem = document.getElementById(statementId);

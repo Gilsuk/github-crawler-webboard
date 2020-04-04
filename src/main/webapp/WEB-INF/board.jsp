@@ -43,24 +43,24 @@
 
 	<!-- 이전 페이지로 가기 -->
 	<c:if test="${paging.curPage gt 1}">
-	<li class="page-item"><a class="page-link" href="/board?curPage=${paging.curPage - 1 }">Prev</a></li>
+	<li class="page-item"><a class="page-link" href="/board?curPage=${paging.curPage - 1 }${queryStr}">Prev</a></li>
 	</c:if>
 	
 	<!-- 페이징 리스트 -->
 	<c:forEach begin="${paging.startPage}" end="${paging.endPage }" var="i">
 		<c:choose>
 			<c:when test="${paging.curPage eq i }">
-				<li class="page-item active" aria-current="page"><a class="page-link" href="/board?curPage=${i }">${i}</a></li>
+				<li class="page-item active" aria-current="page"><a class="page-link" href="/board?curPage=${i }${queryStr}">${i}</a></li>
 			</c:when>
 			<c:otherwise>
-				<li class="page-item"><a class="page-link" href="/board?curPage=${i }">${i}</a></li>
+				<li class="page-item"><a class="page-link" href="/board?curPage=${i }${queryStr}">${i}</a></li>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 
 	<!-- 다음 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage}">
-	<li class="page-item"><a class="page-link" href="/board?curPage=${paging.curPage + 1 }">Next</a></li>
+	<li class="page-item"><a class="page-link" href="/board?curPage=${paging.curPage + 1 }${queryStr}">Next</a></li>
 	</c:if>
 	
 	</ul>
@@ -77,7 +77,7 @@
 			</select>
 		</div>
 		<div class="col-2 my-1">
-			<input class="form-control" name="keyword" type="text" required="required" placeholder="키워드 입력" />
+			<input class="form-control" name="search" type="text" required="required" placeholder="키워드 입력" />
 		</div>
 		<div class="col-1 my-1">
 			<button type="submit" class="btn btn-primary">검색</button>

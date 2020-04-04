@@ -9,6 +9,26 @@
 	<query id="selectTotalCount">
 	SELECT count(*) FROM repo
 	</query>
+	
+	<query id="selectTotalCountSearchByDesc">
+	SELECT count(*) FROM repo
+	WHERE description LIKE ?
+	</query>
+
+	<query id="selectTotalCountSearchByLang">
+	SELECT count(*) FROM lang
+	WHERE name = ?
+	</query>
+
+	<query id="selectTotalCountSearchByTag">
+	SELECT count(*) FROM tag
+	WHERE name = ?
+	</query>
+
+	<query id="selectTotalCountSearchByTitle">
+	SELECT count(*) FROM repo
+	WHERE title LIKE ?
+	</query>
 
 	<query id="selectRepos">
 	SELECT * FROM repo
@@ -16,6 +36,38 @@
 	LIMIT ? OFFSET ?
 	</query>
 	
+	<query id="selectReposByDesc">
+	SELECT * FROM repo
+	WHERE description LIKE ?
+	ORDER BY id
+	LIMIT ? OFFSET ?
+	</query>
+
+	<query id="selectReposByTitle">
+	SELECT * FROM repo
+	WHERE title LIKE ?
+	ORDER BY id
+	LIMIT ? OFFSET ?
+	</query>
+
+	<query id="selectReposByLang">
+	SELECT * FROM repo
+	WHERE id IN (
+		SELECT id FROM lang
+		WHERE name = ?
+	) ORDER BY id
+	LIMIT ? OFFSET ?
+	</query>
+
+	<query id="selectReposByTag">
+	SELECT * FROM repo
+	WHERE id IN (
+		SELECT id FROM tag
+		WHERE name = ?
+	) ORDER BY id
+	LIMIT ? OFFSET ?
+	</query>
+
 	<query id="selectLangsById">
 	SELECT name FROM lang
 	WHERE id = ?
